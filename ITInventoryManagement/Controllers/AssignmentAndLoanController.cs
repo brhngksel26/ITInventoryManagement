@@ -8,9 +8,9 @@ namespace ITInventoryManagement.Controllers
     public class AssignmentAndLoanController : Controller
     {
         private readonly DataContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public AssignmentAndLoanController(DataContext context, UserManager<IdentityUser> userManager)
+        public AssignmentAndLoanController(DataContext context, UserManager<AppUser> userManager)
         {
             _context = context;
             _userManager = userManager;
