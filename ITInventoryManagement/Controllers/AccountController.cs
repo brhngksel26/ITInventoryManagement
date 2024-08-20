@@ -32,7 +32,7 @@ namespace ITInventoryManagement.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction(nameof(InventoryItemsController.Index), nameof(InventoryItemsController));
                 }
 
                 ModelState.AddModelError("", "Invalid login attempt");
@@ -66,7 +66,7 @@ namespace ITInventoryManagement.Controllers
                 {
                     await _signInManager.SignInAsync(user, false);
 
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction(nameof(InventoryItemsController.Index), nameof(InventoryItemsController));
                 }
                 foreach (var error in result.Errors)
                 {
@@ -79,14 +79,8 @@ namespace ITInventoryManagement.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "InventoryItems");
         }
 
-        private IActionResult RedirectToLocal(string? returnUrl)
-        {
-            return !string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)
-                ? Redirect(returnUrl)
-                : RedirectToAction(nameof(HomeController.Index), nameof(HomeController));
-        }
     }
 }

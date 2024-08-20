@@ -40,11 +40,11 @@ namespace ITInventoryManagement.Controllers
 
         [HttpGet("search")]
         public async Task<IActionResult> SearchInventory(
-                string name = null,
-                string serialNumber = null,
-                string model = null,
-                string brand = null,
-                string category = null,
+                string? name = null,
+                string? serialNumber = null,
+                string? model = null,
+                string? brand = null,
+                string? category = null,
                 DateTime? purchaseDateFrom = null,
                 DateTime? purchaseDateTo = null,
                 int? StockQuantity = null,
