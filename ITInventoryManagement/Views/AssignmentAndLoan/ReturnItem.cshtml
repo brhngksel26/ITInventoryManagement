@@ -1,0 +1,29 @@
+﻿@model ITInventoryManagement.Models.Assignment
+
+@{
+    ViewData["Title"] = "Return Assigned Item";
+}
+
+<h2>Return Assigned Item</h2>
+
+<form asp-action="ReturnItem" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="InventoryItemId" class="control-label">Item</label>
+        <input asp-for="InventoryItemId" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserId" class="control-label">User</label>
+        <input asp-for="UserId" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Return" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
