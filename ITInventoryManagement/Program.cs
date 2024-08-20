@@ -1,6 +1,8 @@
 using ITInventoryManagement.Data;
 using ITInventoryManagement.Models;
+using ITInventoryManagement.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,11 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(
     })
        .AddEntityFrameworkStores<DataContext>()
        .AddDefaultTokenProviders();
+
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.AddScoped<BackgroundService, NotificationService>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
