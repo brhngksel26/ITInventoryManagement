@@ -11,6 +11,8 @@ namespace ITInventoryManagement.Data
 
         public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Loan> Loans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

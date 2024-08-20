@@ -1,0 +1,103 @@
+﻿@page
+@using ITInventoryManagement.ViewModel;
+@model SearchModel
+@{
+    ViewData["Title"] = "Search Inventory";
+    var isSelected = Model.IsLoaned == true ? "selected" : null;
+    var unSelected = Model.IsLoaned == false ? "selected" : null;
+
+
+}
+<h2>Search Inventory</h2>
+
+<form method="post" asp-controller="InventoryItems" asp-action="SearchInventory">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" class="form-control" value="@Model.Name" />
+    </div>
+    <div class="form-group">
+        <label for="serialNumber">Serial Number:</label>
+        <input type="text" id="serialNumber" name="serialNumber" class="form-control" value="@Model.SerialNumber" />
+    </div>
+    <div class="form-group">
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" class="form-control" value="@Model.Model" />
+    </div>
+    <div class="form-group">
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" name="brand" class="form-control" value="@Model.Brand" />
+    </div>
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" class="form-control" value="@Model.Category" />
+    </div>
+    <div class="form-group">
+        <label for="purchaseDateFrom">Purchase Date From:</label>
+        <input type="date" id="purchaseDateFrom" name="purchaseDateFrom" class="form-control" value="@Model.PurchaseDateFrom?.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="form-group">
+        <label for="purchaseDateTo">Purchase Date To:</label>
+        <input type="date" id="purchaseDateTo" name="purchaseDateTo" class="form-control" value="@Model.PurchaseDateTo?.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="form-group">
+        <label for="stockQuantity">Stock Quantity:</label>
+        <input type="number" id="stockQuantity" name="stockQuantity" class="form-control" value="@Model.StockQuantity" />
+    </div>
+    <div class="form-group">
+        <label for="isLoaned">Is Loaned:</label>
+        <select id="isLoaned" name="isLoaned" class="form-control">
+            <option value="">Any</option>
+            <option value="true" selected="@isSelected">No</option>
+            <option value="false" selected="@unSelected">No</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="isLoaned">Is Loaned:</label>
+        <select id="isLoaned" name="isLoaned" class="form-control">
+            <option value="">Any</option>
+            <option value="true" selected="@isSelected">No</option>
+            <option value="false" selected="@unSelected">No</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model.InventoryItems != null && Model.InventoryItems.Any())
+{
+    <h3>Results:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Serial Number</th>
+                <th>Model</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Purchase Date</th>
+                <th>Stock Quantity</th>
+                <th>Assigned</th>
+                <th>Loaned</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.InventoryItems)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.SerialNumber</td>
+                    <td>@item.Model</td>
+                    <td>@item.Brand</td>
+                    <td>@item.Category.Name</td>
+                    <td>@item.PurchaseDate.ToShortDateString()</td>
+                    <td>@item.StockQuantity</td>
+                    <td>@item.IsAssigned ? "Yes" : "No"</td>
+                    <td>@item.IsLoaned ? "Yes" : "No"</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No items found.</p>
+}

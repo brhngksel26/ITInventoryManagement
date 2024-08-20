@@ -1,0 +1,30 @@
+﻿@model ITInventoryManagement.Models.Assignment
+
+@{
+    ViewData["Title"] = "Assign Item";
+}
+
+<h2>Assign Item</h2>
+
+<form asp-action="AssignItem" method="post">
+    <div class="form-group">
+        <label asp-for="UserId" class="control-label">User</label>
+        <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="InventoryItemId" class="control-label">Item</label>
+        <select asp-for="InventoryItemId" class="form-control" asp-items="ViewBag.InventoryItemId"></select>
+        <span asp-validation-for="InventoryItemId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Assign" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -38,6 +38,38 @@ namespace ITInventoryManagement.Controllers
             return View(inventoryItem);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchInventory(
+                string name = null,
+                string serialNumber = null,
+                string model = null,
+                string brand = null,
+                string category = null,
+                DateTime? purchaseDateFrom = null,
+                DateTime? purchaseDateTo = null,
+                int? StockQuantity = null,
+                bool? isAssigned = null,
+                bool? isLoaned = null)
+        {
+            var query = _context.InventoryItems.AsQueryable();
+
+            query = query
+                .Where(i => (name == null || i.Name.Contains(name)) &&
+                            (serialNumber == null || i.SerialNumber.Contains(serialNumber)) &&
+                            (model == null || i.Model.Contains(model)) &&
+                            (brand == null || i.Brand.Contains(brand)) &&
+                            (category == null || i.Category.Name.Contains(category)) &&
+                            (!purchaseDateFrom.HasValue || i.PurchaseDate >= purchaseDateFrom) &&
+                            (!purchaseDateFrom.HasValue || i.PurchaseDate >= purchaseDateFrom) &&
+                            (!StockQuantity.HasValue || i.StockQuantity <= StockQuantity) &&
+                            (!isAssigned.HasValue || i.IsAssigned == isAssigned) &&
+                            (!isLoaned.HasValue || i.IsLoaned == isLoaned));
+
+            var result = await query.ToListAsync();
+
+            return Ok(result);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Name,SerialNumber,Model,Brand,PurchaseDate,WarrantyExpiryDate,CategoryId,Id,CreatedAt,UpdatedAt,DeletedAt")] InventoryItem inventoryItem)
