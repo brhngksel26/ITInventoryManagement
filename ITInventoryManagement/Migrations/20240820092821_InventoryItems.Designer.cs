@@ -4,6 +4,7 @@ using ITInventoryManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITInventoryManagement.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240820092821_InventoryItems")]
+    partial class InventoryItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,36 +123,6 @@ namespace ITInventoryManagement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(476),
-                            Name = "Laptops",
-                            UpdatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(490)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(492),
-                            Name = "Monitors",
-                            UpdatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(492)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(494),
-                            Name = "Keyboards",
-                            UpdatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(495)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(496),
-                            Name = "Mice",
-                            UpdatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(496)
-                        });
                 });
 
             modelBuilder.Entity("ITInventoryManagement.Models.InventoryItem", b =>
@@ -212,56 +185,6 @@ namespace ITInventoryManagement.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("InventoryItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Brand = "Dell",
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(534),
-                            IsAssigned = false,
-                            IsLoaned = false,
-                            Model = "XPS 13",
-                            Name = "Dell XPS 13",
-                            PurchaseDate = new DateTime(2023, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(523),
-                            SerialNumber = "DXPS13-001",
-                            StockQuantity = 5,
-                            UpdatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(534),
-                            WarrantyExpiryDate = new DateTime(2025, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(529)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Brand = "Samsung",
-                            CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(539),
-                            IsAssigned = false,
-                            IsLoaned = false,
-                            Model = "UltraWide 49",
-                            Name = "Samsung UltraWide Monitor",
-                            PurchaseDate = new DateTime(2023, 10, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(536),
-                            SerialNumber = "SUM-002",
-                            StockQuantity = 3,
-                            UpdatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(540),
-                            WarrantyExpiryDate = new DateTime(2025, 10, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(537)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Brand = "Logitech",
-                            CategoryId = 4,
-                            CreatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(543),
-                            IsAssigned = false,
-                            IsLoaned = false,
-                            Model = "MX Master 3",
-                            Name = "Logitech MX Master 3",
-                            PurchaseDate = new DateTime(2023, 12, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(541),
-                            SerialNumber = "LMXM3-003",
-                            StockQuantity = 10,
-                            UpdatedAt = new DateTime(2024, 8, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(544),
-                            WarrantyExpiryDate = new DateTime(2025, 12, 20, 12, 33, 45, 632, DateTimeKind.Local).AddTicks(542)
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -293,19 +216,19 @@ namespace ITInventoryManagement.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5354ae83-3218-4669-9707-dd861991762e",
+                            Id = "493d7f4e-d1c3-4eba-90b6-7f2a4b2f2da1",
                             Name = "Admin",
                             NormalizedName = "it_staff "
                         },
                         new
                         {
-                            Id = "78a6375f-9f85-4c5e-95c0-25ece12b1d9b",
+                            Id = "dc8c95e4-ea92-495b-aba0-feb4299f08fe",
                             Name = "Standart Account",
                             NormalizedName = "standart_account"
                         },
                         new
                         {
-                            Id = "904ba18c-6c27-4ff7-9888-bceb8bd128f4",
+                            Id = "7a5e6246-9302-49e2-a71f-e20bd2d31bcd",
                             Name = "IT Staff"
                         });
                 });

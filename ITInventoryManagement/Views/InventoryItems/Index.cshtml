@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ITInventoryManagement.Models.InventoryItem>
+
+@{
+    ViewData["Title"] = "Inventory Items";
+}
+
+<h2>Inventory Items</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Serial Number</th>
+            <th>Model</th>
+            <th>Brand</th>
+            <th>Stock Quantity</th>
+            <th>Purchase Date</th>
+            <th>Warranty Expiry Date</th>
+            <th>Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.SerialNumber</td>
+                <td>@item.Model</td>
+                <td>@item.Brand</td>
+                <td>@item.StockQuantity</td>
+                <td>@item.PurchaseDate.ToShortDateString()</td>
+                <td>@item.WarrantyExpiryDate?.ToShortDateString()</td>
+                <td>@item.Category.Name</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Inventory Item</a>
